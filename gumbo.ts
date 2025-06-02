@@ -26,11 +26,15 @@ function ParseGameJSON(json: string): Game {
 
     const play_events = v.playEvents;
 
-    return new Play(new PlayResult(v.result as IPlayResult), new PlayEvents(play_events))
+    return new Play(
+      new PlayResult(v.result as IPlayResult),
+      new PlayEvents(play_events),
+    );
   });
 
   const currentPlay = new Play(
-    new PlayResult(ld.plays.currentPlay.result as IPlayResult), new PlayEvents(ld.plays.currentPlay.playEvents)
+    new PlayResult(ld.plays.currentPlay.result as IPlayResult),
+    new PlayEvents(ld.plays.currentPlay.playEvents),
   );
   return new Game(new Plays(plays, currentPlay));
 }

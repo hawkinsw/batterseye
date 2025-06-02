@@ -17,7 +17,7 @@ export class PlayResultEvent {
 
 let _static_play_result_events: _PlayResultEvents | undefined;
 
-export function PlayResultEvents() : _PlayResultEvents {
+export function PlayResultEvents(): _PlayResultEvents {
   if (_static_play_result_events == undefined) {
     _static_play_result_events = new _PlayResultEvents();
   }
@@ -30,12 +30,15 @@ export class _PlayResultEvents {
 
   public constructor() {
     this._events = new None();
-      
+
     const events = backup_play_result_events as IPlayResultEvents;
 
     this._events = new Some(events.reduce(
       (existing: Map<string, PlayResultEvent>, next: IPlayResultEventType) => {
-        existing.set(next.code, new PlayResultEvent(next.code, next.description));
+        existing.set(
+          next.code,
+          new PlayResultEvent(next.code, next.description),
+        );
         return existing;
       },
       new Map(),

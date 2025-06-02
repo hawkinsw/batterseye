@@ -30,7 +30,7 @@ export class Some<A> extends Option<A> {
   }
 
   public override toString(): string {
-    return `${this.value}`
+    return `${this.value}`;
   }
 }
 

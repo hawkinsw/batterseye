@@ -1,9 +1,8 @@
 /** Interfaces defining format of GUMBO -- for parsing purposes */
 
-
 export interface IPlateZone {
-  id: number,
-  description: string
+  id: number;
+  description: string;
 }
 
 export type IPlateZones = Array<IPlateZone>;
@@ -19,8 +18,8 @@ export interface IPlayResultEventType {
 export type IPlayResultEvents = Array<IPlayResultEventType>;
 
 export interface IPitchCoordinates {
-  pX: number,
-  pZ: number,
+  pX: number;
+  pZ: number;
 }
 
 export interface IPlayResult {
@@ -31,9 +30,9 @@ export interface IPlayResult {
 }
 
 export interface IPitchData {
-  startSpeed: number
-  zone: number
-  coordinates: IPitchCoordinates
+  startSpeed: number;
+  zone: number;
+  coordinates: IPitchCoordinates;
 }
 
 export interface IPlayEvent {
@@ -46,7 +45,7 @@ export type IPlayEvents = Array<IPlayEvent>;
 
 export interface IPlay {
   result: IPlayResult;
-  playEvents: IPlayEvents
+  playEvents: IPlayEvents;
 }
 
 export interface IPlays {

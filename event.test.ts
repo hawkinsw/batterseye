@@ -19,6 +19,8 @@ Deno.test("simple event type test (not cached)", () => {
 
   assertEquals(
     "Double (double)",
-    `${result.eventFromKey("double").orValue(new PlayResultEvent("fail", "fail"))}`,
+    `${
+      result.eventFromKey("double").orValue(new PlayResultEvent("fail", "fail"))
+    }`,
   );
 });

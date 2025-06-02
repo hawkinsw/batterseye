@@ -13,13 +13,15 @@ export class PlateZone {
   }
 
   public toString(): string {
-    return `${this.isStrike ? "Strike" : "Ball"} - ${this.description} (${this.key})`;
+    return `${
+      this.isStrike ? "Strike" : "Ball"
+    } - ${this.description} (${this.key})`;
   }
 }
 
 let _static_plate_zones: _PlateZones | undefined;
 
-export function PlateZones() : _PlateZones {
+export function PlateZones(): _PlateZones {
   if (_static_plate_zones == undefined) {
     _static_plate_zones = new _PlateZones();
   }
@@ -42,13 +44,20 @@ export class _PlateZones {
 
   public constructor() {
     this._events = new None();
-      
+
     const last_strike_zone = 9;
     const events = _plate_zones_raw as IPlateZones;
 
     this._events = new Some(events.reduce(
       (existing: Map<number, PlateZone>, next: IPlateZone) => {
-        existing.set(next.id, new PlateZone(next.id, next.description, next.id < last_strike_zone ? true : false));
+        existing.set(
+          next.id,
+          new PlateZone(
+            next.id,
+            next.description,
+            next.id < last_strike_zone ? true : false,
+          ),
+        );
         return existing;
       },
       new Map(),
@@ -66,58 +75,57 @@ export class _PlateZones {
   }
 }
 
-
 const _plate_zones_raw = [
   {
     "id": 1,
-    "description": "High - Left"
+    "description": "High - Left",
   },
   {
     "id": 2,
-    "description": "High - Middle"
+    "description": "High - Middle",
   },
   {
     "id": 3,
-    "description": "High - Right"
+    "description": "High - Right",
   },
   {
     "id": 4,
-    "description": "Middle - Left"
+    "description": "Middle - Left",
   },
   {
     "id": 5,
-    "description": "Middle - Middle"
+    "description": "Middle - Middle",
   },
   {
     "id": 6,
-    "description": "Middle - Right"
+    "description": "Middle - Right",
   },
   {
     "id": 7,
-    "description": "Low - Left"
+    "description": "Low - Left",
   },
   {
     "id": 8,
-    "description": "Low - Middle"
+    "description": "Low - Middle",
   },
   {
     "id": 9,
-    "description": "Low - Right"
+    "description": "Low - Right",
   },
   {
     "id": 11,
-    "description": "High - Left"
+    "description": "High - Left",
   },
   {
     "id": 12,
-    "description": "High - Right"
+    "description": "High - Right",
   },
   {
     "id": 13,
-    "description": "Low - Left"
+    "description": "Low - Left",
   },
   {
     "id": 14,
-    "description": "Low - Right"
-  }
-]
+    "description": "Low - Right",
+  },
+];

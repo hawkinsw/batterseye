@@ -1,11 +1,20 @@
-import { PlayResultEvents, PlayResultEvent as PlayResultEvent} from "./event.ts";
-import { IPitchCoordinates, IPitchData, IPlayEvent, IPlayEvents, IPlayResult } from "./interfaces.ts";
+import {
+  PlayResultEvent as PlayResultEvent,
+  PlayResultEvents,
+} from "./event.ts";
+import {
+  IPitchCoordinates,
+  IPitchData,
+  IPlayEvent,
+  IPlayEvents,
+  IPlayResult,
+} from "./interfaces.ts";
 import { Option } from "./option.ts";
 import { PlateZone, PlateZones } from "./plate.ts";
 
 export class PitchCoordinates {
   pX: number;
-  pZ: number
+  pZ: number;
 
   constructor(from_i: IPitchCoordinates) {
     this.pX = from_i.pX;
@@ -13,23 +22,23 @@ export class PitchCoordinates {
   }
 
   public toString(): string {
-    return `pX: ${this.pX} pZ: ${this.pZ}`
+    return `pX: ${this.pX} pZ: ${this.pZ}`;
   }
 }
 
 export class PitchData {
   startSpeed: number;
   zone: Option<PlateZone>;
-  coordinates: PitchCoordinates
+  coordinates: PitchCoordinates;
 
   constructor(from_i: IPitchData) {
     this.startSpeed = from_i.startSpeed;
-    this.zone = PlateZones().zoneFromId(from_i.zone)
-    this.coordinates = new PitchCoordinates(from_i.coordinates)
+    this.zone = PlateZones().zoneFromId(from_i.zone);
+    this.coordinates = new PitchCoordinates(from_i.coordinates);
   }
 
   public toString(): string {
-    return `startSpeed: ${this.startSpeed}; zone: ${this.zone}; coordinates: ${this.coordinates}`
+    return `startSpeed: ${this.startSpeed}; zone: ${this.zone}; coordinates: ${this.coordinates}`;
   }
 }
 
@@ -45,16 +54,21 @@ export class PlayEvent {
   }
 
   public toString(): string {
-    return `details: ${this.details}, isPitch: ${this.isPitch}` + this.isPitch ? `pitchData: ${this.pitchData}` : ""
+    return `details: ${this.details}, isPitch: ${this.isPitch}` + this.isPitch
+      ? `pitchData: ${this.pitchData}`
+      : "";
   }
 }
 
 export class PlayEvents {
-  events: Array<PlayEvent>
+  events: Array<PlayEvent>;
 
   constructor(events: IPlayEvents) {
-    this.events = events.map((i_event: IPlayEvent) => { 
-      const event = new PlayEvent(JSON.stringify(i_event.details), i_event.isPitch);
+    this.events = events.map((i_event: IPlayEvent) => {
+      const event = new PlayEvent(
+        JSON.stringify(i_event.details),
+        i_event.isPitch,
+      );
       if (event.isPitch) {
         event.pitchData = new PitchData(i_event.pitchData);
       }
@@ -70,7 +84,7 @@ export class PlayEvents {
   }
 
   public toString(): string {
-    return `events: ${this.pitches().join("###")}`
+    return `events: ${this.pitches().join("###")}`;
   }
 }
 
@@ -89,7 +103,7 @@ export class PlayResult {
   }
 
   public toString(): string {
-    return `eventType: ${this.eventType}, description: ${this.description}, `
+    return `eventType: ${this.eventType}, description: ${this.description}, `;
   }
 }
 
@@ -115,7 +129,9 @@ export class Plays {
   }
 
   public toString(): string {
-    return `all plays: ${this.allPlays.join("\n-------\n")}; current play: ${this.currentPlay}`
+    return `all plays: ${
+      this.allPlays.join("\n-------\n")
+    }; current play: ${this.currentPlay}`;
   }
 }
 
@@ -126,6 +142,6 @@ export class Game {
   }
 
   public toString(): string {
-    return `plays: ${this.liveData}`
+    return `plays: ${this.liveData}`;
   }
 }
