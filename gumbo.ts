@@ -15,11 +15,8 @@ export class GamePk {
   }
 }
 
-function ParseGameJSON(json: string): Game {
-  const _gd = JSON.parse(json);
-
-  const gd = _gd as IGameData;
-  const ld = gd.liveData;
+function ParseRawGame(raw: IGameData): Game {
+  const ld = raw.liveData;
 
   const plays = ld.plays.allPlays.map((v: IPlay) => {
     console.log(`${v.result.type} became ${v.result.event}`);
@@ -39,10 +36,6 @@ function ParseGameJSON(json: string): Game {
   return new Game(new Plays(plays, currentPlay));
 }
 
-function isGamePk(maybe_game_pk: GamePk | string): maybe_game_pk is GamePk {
-  return (maybe_game_pk instanceof GamePk);
-}
-
 export class GUMBO {
   /*
    * Keep track of the base Gameday server.
@@ -53,17 +46,18 @@ export class GUMBO {
     this.urls = new MLBUrls(u);
   }
 
-  public async getGame(game: GamePk | string): Promise<Game> {
-    if (isGamePk(game)) {
-      const url = this.urls.Game(game);
+  public async getGame(game: GamePk): Promise<Game> {
+    const url = this.urls.Game(game);
 
-      const result = await fetch(url);
+    const result = await fetch(url);
 
-      const result_body = await result.text();
+    const result_body = await result.text();
 
-      return ParseGameJSON(result_body);
-    }
-    return ParseGameJSON(game);
+    return ParseRawGame(JSON.parse(result_body));
+  }
+
+  public static GameFromRaw(raw_game: unknown): Game {
+    return ParseRawGame(raw_game as IGameData);
   }
 
   public async getGamePks(

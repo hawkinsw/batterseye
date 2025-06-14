@@ -26,19 +26,17 @@ Deno.test("simple get game test", async () => {
   const pk = new GamePk("778141");
   const result = await gumbo.getGame(pk);
 
-  console.log(`result: ${JSON.stringify(result)}`);
+  assertEquals(result, GUMBO.GameFromRaw(testable_game_raw))
 });
 
 Deno.test("simple get game test (cached)", async () => {
-  const gumbo = await new GUMBO(new URL("https://statsapi.mlb.com"));
-  const result = await gumbo.getGame(JSON.stringify(testable_game_raw));
+  const result = await GUMBO.GameFromRaw(testable_game_raw);
 
   console.log(`result: ${result}`);
 });
 
 Deno.test("simple get game - current play test (cached)", async () => {
-  const gumbo = await new GUMBO(new URL("https://statsapi.mlb.com"));
-  const result = await gumbo.getGame(JSON.stringify(testable_game_raw));
+  const result = await GUMBO.GameFromRaw(testable_game_raw);
   console.log(`current play: ${result.liveData.currentPlay}`);
 });
 
@@ -18813,13 +18811,13 @@ export const testable_game_raw = {
                 "description": "Ball",
                 "code": "B",
                 "ballColor": "rgba(39, 161, 39, 1.0)",
-                "trailColor": "rgba(50, 0, 221, 1.0)",
+                "trailColor": "rgba(188, 0, 33, 1.0)",
                 "isInPlay": false,
                 "isStrike": false,
                 "isBall": true,
                 "type": {
-                  "code": "SI",
-                  "description": "Sinker",
+                  "code": "FF",
+                  "description": "Four-Seam Fastball",
                 },
                 "isOut": false,
                 "hasReview": false,
@@ -28740,7 +28738,7 @@ export const testable_game_raw = {
         {
           "result": {
             "type": "atBat",
-            "event": "Double",
+            "event": "Flyout",
             "eventType": "field_out",
             "description":
               "Nolan Arenado flies out to center fielder TJ Friedl.",
@@ -29284,7 +29282,7 @@ export const testable_game_raw = {
       "currentPlay": {
         "result": {
           "type": "atBat",
-          "event": "Double",
+          "event": "Flyout",
           "eventType": "field_out",
           "description": "Nolan Arenado flies out to center fielder TJ Friedl.",
           "rbi": 0,
