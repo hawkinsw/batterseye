@@ -74,7 +74,9 @@ Deno.test("Test ability to filter events into pitches.", async () => {
     1,
   ];
 
-  zip(result.liveData.allPlays, expected_pitch_counts).forEach(([actual, expected]) => {
-    assertEquals(actual.events.pitches().length, expected)
-  });
+  zip(result.liveData.allPlays, expected_pitch_counts).forEach(
+    ([actual, expected]) => {
+      assertEquals(actual.events.pitches().length, expected);
+    },
+  );
 });

@@ -26,7 +26,7 @@ Deno.test("simple get game test", async () => {
   const pk = new GamePk("778141");
   const result = await gumbo.getGame(pk);
 
-  assertEquals(result, GUMBO.GameFromRaw(testable_game_raw))
+  assertEquals(result, GUMBO.GameFromRaw(testable_game_raw));
 });
 
 Deno.test("simple get game test (cached)", async () => {

@@ -10,5 +10,5 @@ export function toString(object: object): string {
 export function zip<T, U>(a: Array<T>, b: Array<U>): Array<[T, U]> {
   return a.map((v, i, _) => {
     return [v, b[i]];
-  })
+  });
 }
