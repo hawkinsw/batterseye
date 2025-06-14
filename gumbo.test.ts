@@ -42,7 +42,7 @@ Deno.test("simple get game - current play test (cached)", async () => {
   console.log(`current play: ${result.liveData.currentPlay}`);
 });
 
-const testable_game_raw = {
+export const testable_game_raw = {
   "copyright":
     "Copyright 2025 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt",
   "gamePk": 778141,

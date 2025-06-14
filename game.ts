@@ -3,6 +3,7 @@ import {
   PlayResultEvents,
 } from "./event.ts";
 import {
+  IPitchBreaks,
   IPitchCoordinates,
   IPitchData,
   IPlayEvent,
@@ -11,6 +12,33 @@ import {
 } from "./interfaces.ts";
 import { Option } from "./option.ts";
 import { PlateZone, PlateZones } from "./plate.ts";
+import { toString } from "./toString.ts";
+
+export class PitchBreaks {
+  breakAngle: number;
+  breakLength: number;
+  breakY: number;
+  breakVertical: number;
+  breakVerticalInduced: number;
+  breakHorizontal: number;
+  spinRate: number;
+  spinDirection: number;
+
+  constructor(from_i: IPitchBreaks) {
+    this.breakAngle = from_i.breakAngle;
+    this.breakLength = from_i.breakLength;
+    this.breakY = from_i.breakY;
+    this.breakVertical = from_i.breakVertical;
+    this.breakVerticalInduced = from_i.breakVerticalInduced;
+    this.breakHorizontal = from_i.breakHorizontal;
+    this.spinRate = from_i.spinRate;
+    this.spinDirection = from_i.spinDirection;
+  }
+
+  public toString(): string {
+    return toString(this);
+  }
+}
 
 export class PitchCoordinates {
   pX: number;
@@ -22,7 +50,7 @@ export class PitchCoordinates {
   }
 
   public toString(): string {
-    return `pX: ${this.pX} pZ: ${this.pZ}`;
+    return toString(this);
   }
 }
 
@@ -38,7 +66,7 @@ export class PitchData {
   }
 
   public toString(): string {
-    return `startSpeed: ${this.startSpeed}; zone: ${this.zone}; coordinates: ${this.coordinates}`;
+    return toString(this);
   }
 }
 
@@ -54,14 +82,12 @@ export class PlayEvent {
   }
 
   public toString(): string {
-    return `details: ${this.details}, isPitch: ${this.isPitch}` + this.isPitch
-      ? `pitchData: ${this.pitchData}`
-      : "";
+    return toString(this);
   }
 }
 
 export class PlayEvents {
-  events: Array<PlayEvent>;
+  private events: Array<PlayEvent>;
 
   constructor(events: IPlayEvents) {
     this.events = events.map((i_event: IPlayEvent) => {
@@ -84,7 +110,7 @@ export class PlayEvents {
   }
 
   public toString(): string {
-    return `events: ${this.pitches().join("###")}`;
+    return toString(this);
   }
 }
 
@@ -103,7 +129,7 @@ export class PlayResult {
   }
 
   public toString(): string {
-    return `eventType: ${this.eventType}, description: ${this.description}, `;
+    return toString(this);
   }
 }
 
@@ -115,7 +141,7 @@ export class Play {
     this.events = events;
   }
   public toString(): string {
-    return `result: ${this.result}; events: ${this.events}`;
+    return toString(this);
   }
 }
 
@@ -142,6 +168,6 @@ export class Game {
   }
 
   public toString(): string {
-    return `plays: ${this.liveData}`;
+    return toString(this);
   }
 }

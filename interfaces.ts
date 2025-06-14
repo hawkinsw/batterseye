@@ -17,11 +17,6 @@ export interface IPlayResultEventType {
 
 export type IPlayResultEvents = Array<IPlayResultEventType>;
 
-export interface IPitchCoordinates {
-  pX: number;
-  pZ: number;
-}
-
 export interface IPlayResult {
   type: string;
   event: string;
@@ -29,10 +24,28 @@ export interface IPlayResult {
   description: string;
 }
 
+// Pitch Data Interfaces
+export interface IPitchBreaks {
+  breakAngle: number;
+  breakLength: number;
+  breakY: number;
+  breakVertical: number;
+  breakVerticalInduced: number;
+  breakHorizontal: number;
+  spinRate: number;
+  spinDirection: number;
+}
+
+export interface IPitchCoordinates {
+  pX: number;
+  pZ: number;
+}
+
 export interface IPitchData {
   startSpeed: number;
   zone: number;
   coordinates: IPitchCoordinates;
+  breaks: IPitchBreaks;
 }
 
 export interface IPlayEvent {
@@ -53,9 +66,10 @@ export interface IPlays {
   currentPlay: IPlay;
 }
 
-export interface _IPlays {
+export interface ILiveData {
   plays: IPlays;
 }
-export interface IGame {
-  liveData: _IPlays;
+
+export interface IGameData {
+  liveData: ILiveData;
 }

@@ -1,5 +1,5 @@
 import { Game, Play, PlayEvents, PlayResult, Plays } from "./game.ts";
-import { IGame, IPlay, IPlayResult } from "./interfaces.ts";
+import { IGameData, IPlay, IPlayResult } from "./interfaces.ts";
 import { None, Option, Some } from "./option.ts";
 import { MLBUrls } from "./url.ts";
 
@@ -18,7 +18,7 @@ export class GamePk {
 function ParseGameJSON(json: string): Game {
   const _gd = JSON.parse(json);
 
-  const gd = _gd as IGame;
+  const gd = _gd as IGameData;
   const ld = gd.liveData;
 
   const plays = ld.plays.allPlays.map((v: IPlay) => {
