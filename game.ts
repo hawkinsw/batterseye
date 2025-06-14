@@ -12,7 +12,7 @@ import {
 } from "./interfaces.ts";
 import { Option } from "./option.ts";
 import { PlateZone, PlateZones } from "./plate.ts";
-import { toString } from "./toString.ts";
+import { toString } from "./utils.ts";
 
 export class PitchBreaks {
   breakAngle: number;
