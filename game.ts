@@ -12,7 +12,7 @@ import {
 } from "./interfaces.ts";
 import { Option } from "./option.ts";
 import { PlateZone, PlateZones } from "./plate.ts";
-import { toString } from "./utils.ts";
+import { describe, toString } from "./utils.ts";
 
 export class PitchBreaks {
   breakAngle: number;
@@ -55,8 +55,11 @@ export class PitchCoordinates {
 }
 
 export class PitchData {
+  @describe
   startSpeed: number;
+  @describe
   zone: Option<PlateZone>;
+  @describe
   coordinates: PitchCoordinates;
 
   constructor(from_i: IPitchData) {

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "strictPropertyInitialization": true
+    "strictPropertyInitialization": true,
+    "experimentalDecorators": true
 	},
   "fmt": {
     "exclude": ["*.json"]
