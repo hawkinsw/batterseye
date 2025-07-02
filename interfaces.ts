@@ -46,6 +46,7 @@ export interface IPitchData {
   zone: number;
   coordinates: IPitchCoordinates;
   breaks: IPitchBreaks;
+  typeConfidence: number;
 }
 
 export interface IPlayEvent {

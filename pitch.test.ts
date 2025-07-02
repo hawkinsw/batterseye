@@ -3,7 +3,9 @@ import { IPitchData } from "./interfaces.ts";
 
 Deno.test("pitch data toString test (using describe)", () => {
   const pd = new PitchData(testingPitchData as IPitchData);
-  console.log(pd.toString())
+  console.log(
+    `pitching data toString (typeConfidence should not appear): ${pd.toString()}`,
+  );
 });
 
 const testingPitchData = {

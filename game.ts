@@ -61,11 +61,13 @@ export class PitchData {
   zone: Option<PlateZone>;
   @describe
   coordinates: PitchCoordinates;
+  typeConfidence: number;
 
   constructor(from_i: IPitchData) {
     this.startSpeed = from_i.startSpeed;
     this.zone = PlateZones().zoneFromId(from_i.zone);
     this.coordinates = new PitchCoordinates(from_i.coordinates);
+    this.typeConfidence = from_i.typeConfidence;
   }
 
   public toString(): string {
